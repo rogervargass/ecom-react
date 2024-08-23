@@ -9,4 +9,9 @@ export type ProductType = {
   sizes: string[];
   date: number;
   bestseller: boolean;
-}
+};
+
+export type ProductCardType = Pick<
+  ProductType,
+  "_id" | "name" | "price" | "image"
+>;
