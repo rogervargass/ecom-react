@@ -14,7 +14,7 @@ type ShopContextProviderProps = {
 };
 
 const DEFAULT_VALUE = {
-  currency: "BRL",
+  currency: "$",
   deliveryFee: 10,
   products: [] as ProductType[],
   setProductsList: () => {},
