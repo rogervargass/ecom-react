@@ -14,11 +14,16 @@ export const useShopContext = () => {
     return products.slice(0, limit);
   };
 
+  const getBestSellerProducts = (limit: number) => {
+   return products.filter((product) => product.bestseller).slice(0, limit);
+  };
+
   return {
     currency,
     deliveryFee,
     products,
     updateProductsList,
     getLatestProducts,
+    getBestSellerProducts
   };
 };
