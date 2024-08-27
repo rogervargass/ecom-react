@@ -1,6 +1,14 @@
 import React from "react";
 import { ShopContext } from "../context/ShopContext";
+import { Category } from "../types/Category.enum";
 import { ProductType } from "../types/Product";
+import { SortBy } from "../types/SortBy.enum";
+import { SubCategory } from "../types/SubCategory.enum";
+
+const sortFn = {
+  [SortBy.LOW_TO_HIGH]: (a: ProductType, b: ProductType) => a.price - b.price,
+  [SortBy.HIGH_TO_LOW]: (a: ProductType, b: ProductType) => b.price - a.price,
+};
 
 export const useShopContext = () => {
   const { currency, deliveryFee, products, setProductsList } =
@@ -15,7 +23,42 @@ export const useShopContext = () => {
   };
 
   const getBestSellerProducts = (limit: number) => {
-   return products.filter((product) => product.bestseller).slice(0, limit);
+    return products.filter((product) => product.bestseller).slice(0, limit);
+  };
+
+  const getProductsByFilterAndSort = (
+    newCategories: Category[],
+    newSubCategories:  SubCategory[],
+    sortBy: SortBy
+  ) => {
+    const filteredListByCategory = filterProductsByCategory(products, newCategories);
+    const filteredListBySubCategory = filterProductsBySubCategory(filteredListByCategory, newSubCategories);
+    const sortList = sortProductsList(filteredListBySubCategory, sortBy);
+
+    return sortList;
+  };
+
+  const filterProductsByCategory = (
+    list: ProductType[],
+    categoriesList: Category[]
+  ) => {
+    if (categoriesList.length === 0) return list;
+
+    return list.filter((product) => categoriesList.includes(product.category));
+  };
+
+  const filterProductsBySubCategory = (
+    list: ProductType[],
+    categoriesList: SubCategory[]
+  ) => {
+    if (categoriesList.length === 0) return list;
+
+    return list.filter((product) => categoriesList.includes(product.subCategory));
+  };
+
+  const sortProductsList = (list: ProductType[], sortBy: SortBy) => {
+    if(sortBy === SortBy.RELEVANCE) return list;
+    return list.sort((a, b) => sortFn[sortBy](a, b));
   };
 
   return {
@@ -24,6 +67,7 @@ export const useShopContext = () => {
     products,
     updateProductsList,
     getLatestProducts,
-    getBestSellerProducts
+    getBestSellerProducts,
+    getProductsByFilterAndSort,
   };
 };

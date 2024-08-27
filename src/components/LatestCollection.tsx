@@ -5,7 +5,7 @@ import SectionTitle from "./SectionTitle";
 
 function LatestCollection() {
   const { products, getLatestProducts } = useShopContext();
-  const latestProducts = getLatestProducts(10);
+  const latestProducts = getLatestProducts(8);
 
   useEffect(() => {}, [products]);
 

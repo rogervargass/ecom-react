@@ -5,7 +5,7 @@ import SectionTitle from "./SectionTitle";
 
 function BestSeller() {
   const { products, getBestSellerProducts } = useShopContext();
-  const bestSellers = getBestSellerProducts(5);
+  const bestSellers = getBestSellerProducts(4);
 
   useEffect(() => {}, [products]);
 

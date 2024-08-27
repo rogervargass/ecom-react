@@ -1,11 +1,14 @@
+import { Category } from "./Category.enum";
+import { SubCategory } from "./SubCategory.enum";
+
 export type ProductType = {
   _id: string;
   name: string;
   description: string;
   price: number;
   image: string[];
-  category: string;
-  subCategory: string;
+  category: Category;
+  subCategory: SubCategory;
   sizes: string[];
   date: number;
   bestseller: boolean;
