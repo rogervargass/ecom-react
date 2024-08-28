@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
+import SearchBar from "./components/SearchBar"
 import About from "./pages/About"
 import Cart from "./pages/Cart"
 import Collection from "./pages/Collection"
@@ -16,6 +17,7 @@ function App() {
   return (
     <section className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <Navbar />
+      <SearchBar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/collection' element={<Collection />} />

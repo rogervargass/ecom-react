@@ -7,6 +7,10 @@ type ShopContextProps = {
   deliveryFee: number;
   products: ProductType[];
   setProductsList: React.Dispatch<React.SetStateAction<ProductType[]>>;
+  showSearch: boolean;
+  setShowSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type ShopContextProviderProps = {
@@ -18,18 +22,28 @@ const DEFAULT_VALUE = {
   deliveryFee: 10,
   products: [] as ProductType[],
   setProductsList: () => {},
+  showSearch: false,
+  setShowSearch: () => {},
+  searchValue: '',
+  setSearchValue: () => {},
 };
 
 export const ShopContext = createContext<ShopContextProps>(DEFAULT_VALUE);
 
 export const ShopContextProvider = ({ children }: ShopContextProviderProps) => {
   const [productsList, setProductsList] = useState<ProductType[]>(products as ProductType[]);
+  const [searchBarIsVisible, setSearchBarIsVisible] = useState<boolean>(DEFAULT_VALUE.showSearch);
+  const [searchValue, setSearchValue] = useState<string>(DEFAULT_VALUE.searchValue);
 
   const providerValue = {
     currency: DEFAULT_VALUE.currency,
     deliveryFee: DEFAULT_VALUE.deliveryFee,
     products: productsList,
-    setProductsList: setProductsList
+    setProductsList,
+    showSearch: searchBarIsVisible,
+    setShowSearch: setSearchBarIsVisible,
+    searchValue,
+    setSearchValue,
   };
 
   return (

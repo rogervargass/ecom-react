@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { links } from "../constants/navbar-items";
+import { useSearchBar } from "../hooks/useSearchBar";
 
 interface NavBarLinksMobileProps {
   setIsVisibleMenu: (isVisible: boolean) => void;
@@ -56,6 +57,8 @@ function NavBarLinks() {
 }
 
 function Navbar() {
+  const { setSearchBarIsVisible } = useSearchBar();
+
   const [isVisibleMenu, setIsVisibleMenu] = useState(false);
 
   return (
@@ -69,6 +72,7 @@ function Navbar() {
           src={assets.search_icon}
           alt="ícone de busca"
           className="w-5 cursor-pointer"
+          onClick={() => setSearchBarIsVisible(true)}
         />
 
         <div className="group relative">
