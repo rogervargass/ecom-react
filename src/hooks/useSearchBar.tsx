@@ -2,7 +2,7 @@ import React from "react";
 import { ShopContext } from "../context/ShopContext";
 
 export const useSearchBar = () => {
-  const { showSearch, setShowSearch, setSearchValue } = React.useContext(ShopContext);
+  const { showSearch, setShowSearch, setSearchValue, searchValue } = React.useContext(ShopContext);
 
   const setSearchBarIsVisible = (show: boolean) => {
     setShowSearch(show);
@@ -16,5 +16,6 @@ export const useSearchBar = () => {
     showSearch,
     setSearchBarIsVisible,
     search,
+    searchValue,
   };
 };

@@ -29,13 +29,21 @@ export const useShopContext = () => {
   const getProductsByFilterAndSort = (
     newCategories: Category[],
     newSubCategories:  SubCategory[],
-    sortBy: SortBy
+    sortBy: SortBy,
+    search: string
   ) => {
-    const filteredListByCategory = filterProductsByCategory(products, newCategories);
+    const filteredListBySearch = filterProductsBySearch(products, search);
+    const filteredListByCategory = filterProductsByCategory(filteredListBySearch, newCategories);
     const filteredListBySubCategory = filterProductsBySubCategory(filteredListByCategory, newSubCategories);
     const sortList = sortProductsList(filteredListBySubCategory, sortBy);
 
     return sortList;
+  };
+
+  const filterProductsBySearch = (list: ProductType[], search: string) => {
+    if (!search) return list;
+
+    return list.filter((product) => product.name.toLowerCase().includes(search));
   };
 
   const filterProductsByCategory = (

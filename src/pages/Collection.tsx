@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { assets } from "../assets/assets";
 import ProductsList from "../components/ProductsList";
 import SectionTitle from "../components/SectionTitle";
+import { useSearchBar } from "../hooks/useSearchBar";
 import { useShopContext } from "../hooks/useShopContext";
 import { Category } from "../types/Category.enum";
 import { SortBy } from "../types/SortBy.enum";
@@ -21,18 +22,26 @@ const initialFilters: CollectionFilters = {
 
 function Collection() {
   const { getProductsByFilterAndSort } = useShopContext();
+  const { searchValue, showSearch } = useSearchBar();
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<CollectionFilters>(initialFilters);
 
   const productsList = useMemo(() => {
     const { categories, subCategories, sortBy } = filters;
+    let search = '';
+    
+    if(searchValue && showSearch) {
+      search = searchValue.toLowerCase();
+    }
+
     const filteredProducts = getProductsByFilterAndSort(
       categories,
       subCategories,
-      sortBy
+      sortBy,
+      search
     );
     return filteredProducts;
-  }, [filters, getProductsByFilterAndSort]);
+  }, [filters, getProductsByFilterAndSort, searchValue, showSearch]);
 
   const onToggleFilter = (
     e: React.ChangeEvent<HTMLInputElement>,
