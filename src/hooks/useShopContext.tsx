@@ -26,24 +26,61 @@ export const useShopContext = () => {
     return products.filter((product) => product.bestseller).slice(0, limit);
   };
 
+  const getRelatedProducts = (
+    productId: string,
+    category: Category,
+    subCategory: SubCategory,
+    limit: number = 4
+  ) => {
+    const list: ProductType[] = [];
+
+    for (const product of products) {
+      if(list.length >= limit) break;
+
+      if (
+        product.category === category &&
+        product.subCategory === subCategory &&
+        product._id !== productId
+      ) {
+        list.push(product);
+      }
+    }
+
+    return list;
+  };
+
   const getProductsByFilterAndSort = (
     newCategories: Category[],
-    newSubCategories:  SubCategory[],
+    newSubCategories: SubCategory[],
     sortBy: SortBy,
     search: string
   ) => {
     const filteredListBySearch = filterProductsBySearch(products, search);
-    const filteredListByCategory = filterProductsByCategory(filteredListBySearch, newCategories);
-    const filteredListBySubCategory = filterProductsBySubCategory(filteredListByCategory, newSubCategories);
+    const filteredListByCategory = filterProductsByCategory(
+      filteredListBySearch,
+      newCategories
+    );
+    const filteredListBySubCategory = filterProductsBySubCategory(
+      filteredListByCategory,
+      newSubCategories
+    );
     const sortList = sortProductsList(filteredListBySubCategory, sortBy);
 
     return sortList;
   };
 
+  const getProductById = (id: string, list: ProductType[]) => {
+    return list.find(
+      (product) => product._id.toLowerCase() === id.toLowerCase()
+    );
+  };
+
   const filterProductsBySearch = (list: ProductType[], search: string) => {
     if (!search) return list;
 
-    return list.filter((product) => product.name.toLowerCase().includes(search));
+    return list.filter((product) =>
+      product.name.toLowerCase().includes(search)
+    );
   };
 
   const filterProductsByCategory = (
@@ -61,11 +98,13 @@ export const useShopContext = () => {
   ) => {
     if (categoriesList.length === 0) return list;
 
-    return list.filter((product) => categoriesList.includes(product.subCategory));
+    return list.filter((product) =>
+      categoriesList.includes(product.subCategory)
+    );
   };
 
   const sortProductsList = (list: ProductType[], sortBy: SortBy) => {
-    if(sortBy === SortBy.RELEVANCE) return list;
+    if (sortBy === SortBy.RELEVANCE) return list;
     return list.sort((a, b) => sortFn[sortBy](a, b));
   };
 
@@ -77,5 +116,7 @@ export const useShopContext = () => {
     getLatestProducts,
     getBestSellerProducts,
     getProductsByFilterAndSort,
+    getProductById,
+    getRelatedProducts,
   };
 };
