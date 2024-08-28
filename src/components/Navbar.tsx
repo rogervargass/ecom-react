@@ -11,10 +11,7 @@ interface NavBarLinksMobileProps {
 function NavBarLinksMobile({ setIsVisibleMenu }: NavBarLinksMobileProps) {
   return (
     <div className="flex flex-col text-gray-600">
-      <div
-        onClick={() => setIsVisibleMenu(false)}
-        className="flex items-center gap-4 p-3 cursor-pointer"
-      >
+      <div onClick={() => setIsVisibleMenu(false)} className="flex items-center gap-4 p-3 cursor-pointer">
         <img src={assets.dropdown_icon} alt="" className="h-4 rotate-180" />
         <p>Back</p>
       </div>
@@ -42,10 +39,7 @@ function NavBarLinks() {
         {links &&
           links.map((link, index) => (
             <li key={index}>
-              <NavLink
-                to={link.url}
-                className="flex flex-col items-center gap-1"
-              >
+              <NavLink to={link.url} className="flex flex-col items-center gap-1">
                 <span className="uppercase">{link.label}</span>
                 <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
               </NavLink>
@@ -76,11 +70,7 @@ function Navbar() {
         />
 
         <div className="group relative">
-          <img
-            src={assets.profile_icon}
-            alt="ícone de perfil"
-            className="w-5 cursor-pointer"
-          />
+          <img src={assets.profile_icon} alt="ícone de perfil" className="w-5 cursor-pointer" />
           <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
             <div className="flex flex-col gap-2 w-36 py3 px-5 bg-slate-100 text-gray-500 rounded">
               <p className="cursor-pointer hover:text-black">My Profile</p>
@@ -91,11 +81,7 @@ function Navbar() {
         </div>
 
         <Link to="/cart" className="relative">
-          <img
-            src={assets.cart_icon}
-            alt="ícone de carrinho"
-            className="w-5 min-w-5"
-          />
+          <img src={assets.cart_icon} alt="ícone de carrinho" className="w-5 min-w-5" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
             5
           </p>

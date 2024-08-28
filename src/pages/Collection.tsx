@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { assets } from "../assets/assets";
 import ProductsList from "../components/ProductsList";
 import SectionTitle from "../components/SectionTitle";
+import { useFilterProducts } from "../hooks/useFilterProducts";
 import { useSearchBar } from "../hooks/useSearchBar";
-import { useShopContext } from "../hooks/useShopContext";
 import { Category } from "../types/Category.enum";
 import { SortBy } from "../types/SortBy.enum";
 import { SubCategory } from "../types/SubCategory.enum";
@@ -21,7 +21,7 @@ const initialFilters: CollectionFilters = {
 };
 
 function Collection() {
-  const { getProductsByFilterAndSort } = useShopContext();
+  const { getProductsByFilterAndSort } = useFilterProducts();
   const { searchValue, showSearch } = useSearchBar();
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<CollectionFilters>(initialFilters);
