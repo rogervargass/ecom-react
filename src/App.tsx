@@ -20,7 +20,7 @@ function App() {
   return (
     <section className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] w-full flex flex-col h-screen">
       <Navbar />
-      <ToastContainer autoClose={3000} theme="light"/>
+      <ToastContainer autoClose={3000} theme="dark"/>
       <SearchBar />
       <section className="flex-1">
         <Routes>

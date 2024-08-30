@@ -31,7 +31,7 @@ function Product() {
     if (!productData || !sizeSelected) return;
 
     addToCart(productData, sizeSelected);
-    toast.success('Item added to cart!');
+    toast.success('Item added to cart!', {position: "top-center"});
   };
 
   if (!productData) return;
