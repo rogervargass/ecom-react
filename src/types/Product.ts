@@ -18,3 +18,12 @@ export type ProductCardType = Pick<
   ProductType,
   "_id" | "name" | "price" | "image"
 >;
+
+export type CartItemType = {
+  id: string;
+  image: string;
+  name: string;
+  size: string;
+  price: number;
+  quantity: number;
+};

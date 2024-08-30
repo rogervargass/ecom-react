@@ -29,25 +29,30 @@ export const useFilterProducts = () => {
 
   const filterProductsBySearch = (list: ProductType[], search: string) => {
     if (!search) return list;
+    const newList = [...list];
 
-    return list.filter((product) => product.name.toLowerCase().includes(search));
+    return newList.filter((product) => product.name.toLowerCase().includes(search));
   };
 
   const filterProductsByCategory = (list: ProductType[], categoriesList: Category[]) => {
     if (categoriesList.length === 0) return list;
+    const newList = [...list];
 
-    return list.filter((product) => categoriesList.includes(product.category));
+    return newList.filter((product) => categoriesList.includes(product.category));
   };
 
   const filterProductsBySubCategory = (list: ProductType[], categoriesList: SubCategory[]) => {
     if (categoriesList.length === 0) return list;
+    const newList = [...list];
 
-    return list.filter((product) => categoriesList.includes(product.subCategory));
+    return newList.filter((product) => categoriesList.includes(product.subCategory));
   };
 
   const sortProductsList = (list: ProductType[], sortBy: SortBy) => {
     if (sortBy === SortBy.RELEVANCE) return list;
-    return list.sort((a, b) => sortFn[sortBy](a, b));
+    const newList = [...list];
+
+    return newList.sort((a, b) => sortFn[sortBy](a, b));
   };
 
   return {

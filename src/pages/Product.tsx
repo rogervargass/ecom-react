@@ -1,12 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
+import ImageGallery from "../components/ImageGallery";
 import RelatedProducts from "../components/RelatedProducts";
+import { useCart } from "../hooks/useCart";
 import { useShopContext } from "../hooks/useShopContext";
 import { ProductType } from "../types/Product";
+import { formatCurrency } from "../utils/currency";
 
 function Product() {
-  const { getProductById, products } = useShopContext();
+  const { getProductById, products, currency } = useShopContext();
+  const { addToCart } = useCart();
   const { productId } = useParams<{ productId: string }>();
   const [productData, setProductData] = useState<ProductType | null>(null);
   const [sizeSelected, setSizeSelected] = useState<string | null>(null);
@@ -22,21 +27,19 @@ function Product() {
     fetchProduct();
   }, [fetchProduct]);
 
+  const handleAddToCart = () => {
+    if (!productData || !sizeSelected) return;
+
+    addToCart(productData, sizeSelected);
+    toast.success('Item added to cart!');
+  };
+
   if (!productData) return;
 
   return (
     <section className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
-        <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
-            {productData.image.map((image, index) => (
-              <img key={index} src={image} className="w-[24%] sm:w-full flex flex-shrink-0 cursor-pointer" />
-            ))}
-          </div>
-          <div className="w-full sm:w-[80%]">
-            <img className="w-full h-auto" src={productData.image[0]} alt="" />
-          </div>
-        </div>
+        <ImageGallery images={productData.image} />
 
         <div className="flex-1">
           <h1 className="font-medium text-2xl mt-2">{productData.name}</h1>
@@ -48,7 +51,9 @@ function Product() {
             <img src={assets.star_dull_icon} alt="" className="w-3" />
             <p className="pl-2">(122)</p>
           </div>
-          <p className="mt-5 text-3xl font-medium">{productData.price}</p>
+          <p className="mt-5 text-3xl font-medium">
+            {formatCurrency(productData.price, currency)}
+          </p>
           <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
@@ -64,7 +69,13 @@ function Product() {
               ))}
             </div>
           </div>
-          <button className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
+          <button
+            disabled={!sizeSelected}
+            onClick={handleAddToCart}
+            className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 disabled:pointer-events-none disabled:opacity-50"
+          >
+            ADD TO CART
+          </button>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>

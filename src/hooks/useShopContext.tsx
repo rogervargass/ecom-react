@@ -16,7 +16,17 @@ export const useShopContext = () => {
   };
 
   const getBestSellerProducts = (limit: number) => {
-    return products.filter((product) => product.bestseller).slice(0, limit);
+    const list: ProductType[] = [];
+
+    for (const product of products) {
+      if (list.length >= limit) break;
+
+      if (product.bestseller) {
+        list.push(product);
+      }
+    }
+
+    return list;
   };
 
   const getRelatedProducts = (productId: string, category: Category, subCategory: SubCategory, limit: number = 4) => {
