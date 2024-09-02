@@ -90,8 +90,6 @@ export const useCart = () => {
     return cart.reduce((acc, item) => acc + item.quantity, 0);
   }
 
-  const getCartTotalItems = () => cart.reduce((acc, item) => acc + item.quantity, 0);
-
   return {
     addToCart,
     removeFromCart,
@@ -99,8 +97,7 @@ export const useCart = () => {
     cart,
     getCartItemsCount,
     decrementItem,
-    incrementItem,
-    getCartTotalItems
+    incrementItem
   }
 }
 

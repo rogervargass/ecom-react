@@ -9,9 +9,9 @@ import { formatCurrency } from "../utils/currency";
 
 function Cart() {
   const navigate = useNavigate();
-  const { removeFromCart, cart, decrementItem, incrementItem, getCartTotalItems } = useCart();
+  const { removeFromCart, cart, decrementItem, incrementItem, getCartItemsCount } = useCart();
   const { currency } = useShopContext();
-  const cartNotEmpty = getCartTotalItems() > 0;
+  const cartNotEmpty = getCartItemsCount() > 0;
 
   const handleProceedToCheckout = () => {
     navigate("/place-order");
@@ -40,7 +40,7 @@ function Cart() {
       <section className="w-full flex gap-12 justify-between max-h-[380px]">
         <div className="overflow-y-scroll flex-1">
           {cart.map((item) => (
-            <div className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
+            <div key={item.id} className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
               <div className="flex items-start gap-6">
                 <img className="w-16 sm:w-20" src={item.image} alt="" />
                 <div>
