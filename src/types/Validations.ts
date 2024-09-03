@@ -1,4 +1,16 @@
-import { PaymentMethodEnum } from "./PaymentMethod.enum"
+import { PaymentMethodEnum } from "./PaymentMethod.enum";
+
+export type LoginValidationType = {
+  email: string
+  password: string
+};
+
+export type RegisterValidationType = {
+  name: string
+  email: string
+  password: string
+  passwordConfirmation: string
+};
 
 export type DeliveryValidationType = {
   firstName: string
