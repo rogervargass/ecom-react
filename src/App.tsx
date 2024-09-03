@@ -23,7 +23,7 @@ function App() {
       <Navbar />
       <ToastContainer autoClose={3000} theme="dark"/>
       <SearchBar />
-      <section className="flex-1">
+      <main className="flex-1">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/collection' element={<Collection />} />
@@ -37,7 +37,7 @@ function App() {
           <Route path='/orders' element={<Orders />} />
           <Route path='*' element={<h1>404 Not Found</h1>} />
         </Routes>
-      </section>
+      </main>
       <Footer />
     </section>
   )

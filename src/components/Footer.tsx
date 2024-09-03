@@ -2,7 +2,7 @@ import { assets } from "../assets/assets";
 
 function Footer() {
   return (
-    <section>
+    <footer>
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-30 text-sm">
         <div>
           <img
@@ -44,7 +44,7 @@ function Footer() {
           Copyright 2024@ forever.com - All Right Reserved.
         </p>
       </div>
-    </section>
+    </footer>
   );
 }
 

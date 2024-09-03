@@ -59,7 +59,7 @@ function Navbar() {
   const cartItemsCount = useMemo(() => getCartItemsCount(), [getCartItemsCount]);
 
   return (
-    <section className="flex items-center justify-between py-5 font-medium">
+    <header className="flex items-center justify-between py-5 font-medium">
       <img src={assets.logo} alt="logo site" className="w-36" />
 
       <NavBarLinks />
@@ -107,7 +107,7 @@ function Navbar() {
       >
         <NavBarLinksMobile setIsVisibleMenu={setIsVisibleMenu} />
       </div>
-    </section>
+    </header>
   );
 }
 
