@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { LoginSchema } from "../schemas/loginSchema";
 import { LoginValidationType } from "../types/Validations";
@@ -48,7 +48,7 @@ function Login() {
       </div>
       <div className="w-full flex justify-between text-sm">
         <p className="cursor-pointer">Forgot your password?</p>
-        <p className="cursor-pointer">Create account</p>
+        <Link to="/register" className="cursor-pointer">Create account</Link>
       </div>
       <button onClick={handleSubmit(onSubmit)} className="text-white font-light bg-black py-2 px-8 mt-4">
         Sign In
