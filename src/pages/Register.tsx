@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { RegisterSchema } from "../schemas/registerSchema";
 import { RegisterValidationType } from "../types/Validations";
@@ -65,7 +65,7 @@ function Register() {
         <small className="text-red-500 h-5">{errors.passwordConfirmation?.message}</small>
       </div>
       <div className="w-full flex justify-end text-sm">
-        <p className="cursor-pointer">Login Here</p>
+        <Link to="/login" className="cursor-pointer">Already have an account?</Link>
       </div>
       <button onClick={handleSubmit(onSubmit)} className="text-white font-light bg-black py-2 px-8 mt-4">
         Sign Up
